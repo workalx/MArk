@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтернет магазин</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <!-- <img src="img/logo.png" alt="Logo" class="logo"> -->
+        <button class="register-btn">Register</button>
+    </header>
+    <main>
+        <div class="content">
+            <img id="main-image" src="img/5789490725757504353_121.jpg" alt="Le Grande Perfume" style="max-width: 25%;">
+            <img class="hidden" src="img/5789490725757504365_121.jpg" alt="Le Grande Perfume 2">
+            <img class="hidden" src="img/5789490725757504366_121.jpg" alt="Le Grande Perfume 3">
+            <img class="hidden" src="img/5789490725757504368_121.jpg" alt="Le Grande Perfume 4">
+            <button class="arrow" onclick="nextImage()">&#10095;</button>
+            <div class="details">
+                <h1>Le Grande - white (men's perfume)</h1>
+                <br>
+                <h2>Price: $5.00</h2>
+                <br>
+                <div class="quantity">
+                    <button class="arrow left" onclick="decreaseQuantity()">&#10094;</button>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" readonly>
+                    <button class="arrow right" onclick="increaseQuantity()">&#10095;</button>
+                </div>
+                <br>
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="paypal">Pay with PayPal</button>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+        <section class="best-selling">
+            <h2>Best Selling Products</h2>
+            <p>Discover the top favorites our customers can't get enough of</p>
+            <!-- Add product items here -->
+        </section>
+    </main>
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Registration</h2>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+    let currentImageIndex = 0;
+    const images = document.querySelectorAll('.hidden');
+
+    function nextImage() {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        document.getElementById('main-image').src = images[currentImageIndex].src;
+    }
+
+    function openModal() {
+        document.getElementById('register-modal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('register-modal').style.display = 'none';
+    }
+
+    function increaseQuantity() {
+        var quantityInput = document.getElementById('quantity');
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+    }
+
+    function decreaseQuantity() {
+        var quantityInput = document.getElementById('quantity');
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+    }
+
+    document.querySelector('.register-btn').addEventListener('click', openModal);
+    </script>
+</body>
+</html>
+
